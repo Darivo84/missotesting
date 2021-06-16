@@ -10,6 +10,9 @@ import { NavLink } from 'react-router-dom';
 import './navbar.css'
 import logo from '../../images/logo.svg';
 
+// Auth0
+import { useAuth0 } from '@auth0/auth0-react';
+
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -55,8 +58,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const AuthNav = () => {
+//   const { isAuthenticated } = useAuth0();
+// }
+
 const Navbar = () => {
   const classes = useStyles();
+
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <React.Fragment>
@@ -82,11 +91,11 @@ const Navbar = () => {
               Documentation
             </NavLink>
           </nav>
-          <NavLink to="/login">
-          <Button color="primary" variant="outlined" className={classes.link} style={{color: 'linear-gradient(45deg, #733BC3 30%, #C64156 90%)', background: '#fff'}}>
+          {/* <NavLink to="/login"> */}
+          <Button onClick={loginWithRedirect} color="primary" variant="outlined" className={classes.link} style={{color: 'linear-gradient(45deg, #733BC3 30%, #C64156 90%)', background: '#fff'}}>
             Login
           </Button>
-          </NavLink>
+          {/* </NavLink> */}
         </Toolbar>
       </AppBar>
       </React.Fragment>
